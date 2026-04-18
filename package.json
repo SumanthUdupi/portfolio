@@ -8,6 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fontsource-variable/playfair-display": "^5.2.8",
+    "@fontsource-variable/source-serif-4": "^5.2.9",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/source-serif-4": "^5.2.9",
     "@types/d3": "^7.4.3",
     "@vercel/kv": "^3.0.0",
     "d3": "^7.9.0",
