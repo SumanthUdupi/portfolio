@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build && npx pagefind --site .next/server/app --output-path public/pagefind",
+    "start": "next start",
+    "build:next": "next build"
   },
   "dependencies": {
     "@fontsource-variable/playfair-display": "^5.2.8",

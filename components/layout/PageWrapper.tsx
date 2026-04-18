@@ -10,7 +10,7 @@ type PageWrapperProps = {
 
 export function PageWrapper({ children, className }: PageWrapperProps) {
   return (
-    <main className={`${styles.wrapper} ${className ?? ''}`}>
+    <main id="main-content" className={`${styles.wrapper} ${className ?? ''}`}>
       {children}
     </main>
   )

@@ -71,6 +71,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${sourceSerif.variable} ${ibmPlexMono.variable} ${atkinson.variable}`}
     >
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <a href="#main-content" className="skip-link">Skip to main content</a>
           <CalmProvider>
             <Nav />
             <PageTransition>
