@@ -1,0 +1,50 @@
+.meter {
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  margin-bottom: var(--space-6);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 110px 1fr 2rem;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.barLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.track {
+  height: 6px;
+  background: var(--color-border);
+}
+
+.fill {
+  height: 100%;
+}
+
+.barVal {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  text-align: right;
+}

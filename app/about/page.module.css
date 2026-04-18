@@ -1,0 +1,205 @@
+.intro {
+  padding: var(--space-8) 0 var(--space-16);
+  max-width: 720px;
+}
+
+.introText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.chipRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.bio {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 64ch;
+}
+
+.introLinks {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.ctaLink {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent-teal);
+  text-decoration: none;
+}
+
+/* Sections */
+.section {
+  padding: var(--space-12) 0;
+  border-top: 1px solid var(--color-border);
+  max-width: 720px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+}
+
+/* RPG Stats */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: 160px 1fr 2rem;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.statBar {
+  height: 8px;
+  background: var(--color-border);
+}
+
+.statFill {
+  height: 100%;
+  background: var(--color-accent-teal);
+}
+
+.statVal {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent-amber);
+  text-align: right;
+}
+
+/* Skills */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.skillCategory {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.timelineYear {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  padding-top: 4px;
+}
+
+.timelineContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.timelineRole {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.timelineCompany {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent-teal);
+}
+
+.timelineNote {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Certifications */
+.certList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.certItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.certName {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.certOrg {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .skillsGrid { grid-template-columns: 1fr; }
+  .statRow { grid-template-columns: 120px 1fr 2rem; }
+}

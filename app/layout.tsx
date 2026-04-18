@@ -1,5 +1,11 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Source_Serif_4, IBM_Plex_Mono, Atkinson_Hyperlegible } from 'next/font/google'
+import { Nav } from '@/components/layout/Nav'
+import { Footer } from '@/components/layout/Footer'
+import { PageTransition } from '@/components/layout/PageTransition'
+import { CalmProvider } from '@/lib/calm-mode'
+import { Terminal } from '@/components/terminal/Terminal'
+import { KonamiCode } from '@/components/easter-eggs/KonamiCode'
 import './globals.css'
 import '../styles/globals.css'
 import '../styles/typography.css'
@@ -39,6 +45,19 @@ export const metadata: Metadata = {
     default: 'Sumanth Udupi — Product Designer',
   },
   description: 'Product Designer. Mechanical Engineer turned Data Scientist turned Designer. Building interfaces that feel magical.',
+  metadataBase: new URL('https://chaos.curious.me'),
+  openGraph: {
+    type: 'website',
+    siteName: 'Sumanth Udupi',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
@@ -51,7 +70,17 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${sourceSerif.variable} ${ibmPlexMono.variable} ${atkinson.variable}`}
     >
-      <body>{children}</body>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <CalmProvider>
+            <Nav />
+            <PageTransition>
+              {children}
+            </PageTransition>
+            <Footer />
+            <Terminal />
+            <KonamiCode />
+          </CalmProvider>
+        </body>
     </html>
   )
 }

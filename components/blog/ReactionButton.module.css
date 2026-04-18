@@ -1,0 +1,44 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: 1.5px solid var(--color-border);
+  padding: 0.5em 1em;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+}
+
+.reacted {
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+  cursor: default;
+}
+
+.pulse {
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.label {}
+
+.count {
+  background: var(--color-accent-amber);
+  color: var(--color-bg);
+  font-size: var(--text-xs);
+  padding: 0.1em 0.4em;
+  border-radius: 999px;
+}

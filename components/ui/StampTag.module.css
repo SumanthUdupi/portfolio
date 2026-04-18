@@ -1,0 +1,22 @@
+.tag {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1.5px solid currentColor;
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.red   { color: var(--color-accent-red);   }
+.teal  { color: var(--color-accent-teal);  }
+.amber { color: var(--color-accent-amber); }
+.sage  { color: var(--color-accent-sage);  }
+
+a.tag:hover {
+  background: currentColor;
+  color: var(--color-bg);
+}

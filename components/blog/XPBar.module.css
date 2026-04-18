@@ -1,0 +1,15 @@
+.track {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-border);
+  z-index: 99;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-teal), var(--color-accent-amber));
+  transform-origin: left;
+}

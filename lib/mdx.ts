@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { serialize } from 'next-mdx-remote/serialize'
 import { calculateReadingTime } from './reading-time'
 import type { Temperature } from './temperature'
 
@@ -90,7 +89,7 @@ export function getAllProjectMeta(): ProjectMeta[] {
     .sort((a, b) => b.year - a.year)
 }
 
-export async function getPostBySlug(slug: string) {
+export function getPostBySlug(slug: string) {
   if (!fs.existsSync(BLOG_DIR)) return null
 
   const files = fs.readdirSync(BLOG_DIR)
@@ -104,16 +103,15 @@ export async function getPostBySlug(slug: string) {
 
   const raw = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf8')
   const { data, content } = matter(raw)
-  const mdxSource = await serialize(content)
   const reading_time = (data.reading_time as number) || calculateReadingTime(content)
 
   return {
     frontmatter: { ...(data as PostFrontmatter), slug, reading_time } as PostMeta,
-    mdxSource,
+    content,
   }
 }
 
-export async function getProjectBySlug(slug: string) {
+export function getProjectBySlug(slug: string) {
   if (!fs.existsSync(WORK_DIR)) return null
 
   const filename = `${slug}.mdx`
@@ -122,10 +120,9 @@ export async function getProjectBySlug(slug: string) {
 
   const raw = fs.readFileSync(filepath, 'utf8')
   const { data, content } = matter(raw)
-  const mdxSource = await serialize(content)
 
   return {
     frontmatter: { ...(data as ProjectFrontmatter), slug } as ProjectMeta,
-    mdxSource,
+    content,
   }
 }

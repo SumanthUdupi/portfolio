@@ -108,6 +108,16 @@ a:hover {
   border-width: 0;
 }
 
+/* ─── Calm Mode — reduces all motion to opacity fades ───── */
+[data-calm="true"] * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+[data-calm="true"] [style*="transform"] {
+  transform: none !important;
+}
+
 /* ─── SVG Textures ──────────────────────────────────────── */
 .graph-paper {
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 20 0 L 0 0 0 20' fill='none' stroke='%23C4B8A8' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");

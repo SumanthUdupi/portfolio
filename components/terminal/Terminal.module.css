@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.terminal {
+  width: 100%;
+  max-width: 680px;
+  background: #12100E;
+  border: 1.5px solid #3A342C;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: #1E1C18;
+  border-bottom: 1px solid #3A342C;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.title {
+  margin-left: var(--space-3);
+  color: #9E9283;
+  font-size: var(--text-xs);
+  flex: 1;
+  text-align: center;
+}
+
+.close {
+  background: none;
+  border: none;
+  color: #9E9283;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: 0;
+}
+
+.output {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.inputLine {
+  color: #F0EAE0;
+  margin: 0;
+}
+
+.outputLine {
+  color: #3DBAC4;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-top: 1px solid #3A342C;
+}
+
+.prompt {
+  color: #F0A832;
+}
+
+.input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #F0EAE0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  caret-color: #3DBAC4;
+}
