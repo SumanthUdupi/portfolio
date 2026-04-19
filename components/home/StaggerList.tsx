@@ -1,10 +1,17 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import type { ReactNode, HTMLAttributes } from 'react'
+import type { ReactNode } from 'react'
 
-export const itemVariant = {
-  hidden:  { opacity: 0, y: 28 },
+type Props = {
+  className?: string
+  children: ReactNode
+  stagger?: number
+  role?: string
+}
+
+export const cardItemVariant = {
+  hidden:  { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
@@ -12,12 +19,12 @@ export const itemVariant = {
   },
 }
 
-type Props = HTMLAttributes<HTMLElement> & {
-  children: ReactNode
-  stagger?: number
+export const reducedCardItemVariant = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
 }
 
-export function AnimatedSection({ children, className, stagger = 0.1, ...props }: Props) {
+export function StaggerList({ className, children, stagger = 0.1, role }: Props) {
   const prefersReduced = useReducedMotion()
 
   const containerVariants = {
@@ -25,21 +32,21 @@ export function AnimatedSection({ children, className, stagger = 0.1, ...props }
     visible: {
       transition: {
         staggerChildren: prefersReduced ? 0 : stagger,
-        delayChildren: 0.05,
+        delayChildren: 0.08,
       },
     },
   }
 
   return (
-    <motion.section
+    <motion.ul
       className={className}
+      role={role ?? 'list'}
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
-      {...(props as React.ComponentProps<typeof motion.section>)}
     >
       {children}
-    </motion.section>
+    </motion.ul>
   )
 }

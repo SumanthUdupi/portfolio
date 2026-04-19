@@ -1,0 +1,24 @@
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.line {
+  display: inline-flex;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  line-height: inherit;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform;
+}
+
+.space {
+  display: inline-block;
+  width: 0.28em;
+}

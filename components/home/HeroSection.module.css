@@ -235,3 +235,19 @@
     align-items: flex-start;
   }
 }
+
+/* ─── Floating particles ─────────────────────────────────── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-accent-teal);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+[data-theme="dark"] .particle {
+  background: var(--color-accent-amber);
+}
+
+/* bgGrid inherits will-change from motion style */
+.bgGrid { will-change: transform; }

@@ -40,6 +40,11 @@ export function PostCard({ post, variant = 'default' }: PostCardProps) {
       onMouseLeave={onMouseLeave}
       style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }}
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
+      variants={{
+        hidden:  { opacity: 0, y: 28 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+      }}
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
     >
       <div className={styles.accent} />

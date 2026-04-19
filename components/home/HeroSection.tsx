@@ -1,29 +1,60 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { Chip } from '@/components/chip/Chip'
-import { site } from '@/config/site'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 import { ChipClickEgg } from '@/components/easter-eggs/ChipClickEgg'
+import { site } from '@/config/site'
 import styles from './HeroSection.module.css'
 
 const words = site.tagline.split(' ')
 
+const PARTICLES = [
+  { top: '22%', left: '18%', size: 5, duration: 4.8, delay: 0    },
+  { top: '65%', left: '72%', size: 3, duration: 3.6, delay: 0.6  },
+  { top: '38%', left: '88%', size: 4, duration: 5.2, delay: 1.1  },
+  { top: '78%', left: '32%', size: 3, duration: 4.1, delay: 0.3  },
+  { top: '15%', left: '55%', size: 2, duration: 6.0, delay: 0.9  },
+]
+
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const prefersReduced = useReducedMotion()
 
-  const y1    = useTransform(scrollYProgress, [0, 1], ['0%',  '-20%'])
-  const y2    = useTransform(scrollYProgress, [0, 1], ['0%',  '-40%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+
+  const smooth = useSpring(scrollYProgress, { mass: 0.08, stiffness: 100, damping: 20 })
+  const prog = prefersReduced ? scrollYProgress : smooth
+
+  const yGrid = useTransform(prog, [0, 1], ['0%',  '-5%'])
+  const yOrb2 = useTransform(prog, [0, 1], ['0%',  '-25%'])
+  const yOrb1 = useTransform(prog, [0, 1], ['0%',  '-45%'])
+  const yChip = useTransform(prog, [0, 1], ['0%',  '-15%'])
+  const opacity = useTransform(prog, [0, 0.55], [1, 0])
 
   return (
     <section ref={ref} className={styles.hero} aria-label="Introduction">
-      {/* Parallax background elements */}
-      <motion.div className={styles.bgOrb1} style={{ y: y2 }} aria-hidden="true" />
-      <motion.div className={styles.bgOrb2} style={{ y: y1 }} aria-hidden="true" />
-      <div className={styles.bgGrid} aria-hidden="true" />
+      {/* Background — multi-layer parallax */}
+      <motion.div className={styles.bgGrid}    style={{ y: yGrid }} aria-hidden="true" />
+      <motion.div className={styles.bgOrb2}    style={{ y: yOrb2 }} aria-hidden="true" />
+      <motion.div className={styles.bgOrb1}    style={{ y: yOrb1 }} aria-hidden="true" />
+
+      {/* Drifting particles */}
+      {!prefersReduced && PARTICLES.map((p, i) => (
+        <motion.div
+          key={i}
+          className={styles.particle}
+          aria-hidden="true"
+          style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
+          animate={{ y: [0, -14, 0], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      ))}
 
       <motion.div className={styles.content} style={{ opacity }}>
         {/* Eyebrow */}
@@ -39,7 +70,7 @@ export function HeroSection() {
           <span className={styles.available}>Available for work</span>
         </motion.div>
 
-        {/* Name */}
+        {/* Name — letter by letter */}
         <div className={styles.nameWrap} aria-label={site.name}>
           {'Sumanth Udupi'.split('').map((char, i) => (
             <motion.span
@@ -55,7 +86,7 @@ export function HeroSection() {
           ))}
         </div>
 
-        {/* Tagline */}
+        {/* Tagline — word by word */}
         <motion.p
           className={styles.tagline}
           initial={{ opacity: 0 }}
@@ -75,18 +106,24 @@ export function HeroSection() {
           ))}
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs — magnetic */}
         <motion.div
           className={styles.ctas}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.4 }}
         >
-          <Link href="/work" className={styles.ctaPrimary}>
-            View my work
-            <span className={styles.ctaArrow} aria-hidden="true">↗</span>
-          </Link>
-          <Link href="/blog" className={styles.ctaSecondary}>Read the blog</Link>
+          <MagneticButton strength={20} radius={90}>
+            <Link href="/work" className={styles.ctaPrimary}>
+              View my work
+              <span className={styles.ctaArrow} aria-hidden="true">↗</span>
+            </Link>
+          </MagneticButton>
+
+          <MagneticButton strength={14} radius={70}>
+            <Link href="/blog" className={styles.ctaSecondary}>Read the blog</Link>
+          </MagneticButton>
+
           <motion.span
             className={styles.konamiHint}
             initial={{ opacity: 0 }}
@@ -99,13 +136,13 @@ export function HeroSection() {
           </motion.span>
         </motion.div>
 
-        {/* Floating CHIP — click 5 times for egg #2 */}
+        {/* Floating CHIP — parallax layer + click egg */}
         <motion.div
           className={styles.chipFloat}
           initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 0.7, delay: 1.6, type: 'spring', stiffness: 200 }}
-          style={{ y: y1, position: 'relative' }}
+          style={{ y: yChip, position: 'relative' }}
         >
           <ChipClickEgg size={96} hint />
         </motion.div>

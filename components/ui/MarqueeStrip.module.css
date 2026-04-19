@@ -1,0 +1,21 @@
+.root {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.copy {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap, 2rem);
+  padding-right: var(--marquee-gap, 2rem);
+  white-space: nowrap;
+  flex-shrink: 0;
+}

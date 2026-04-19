@@ -40,6 +40,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
+      variants={{
+        hidden:  { opacity: 0, y: 32 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+      }}
       transition={{ type: 'spring', stiffness: 350, damping: 28 }}
     >
       <div className={styles.thumb}>
