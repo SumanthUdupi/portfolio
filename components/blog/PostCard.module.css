@@ -9,9 +9,22 @@
   overflow: hidden;
   cursor: pointer;
   perspective: 800px;
+  position: relative;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.card:hover { text-decoration: none; }
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, color-mix(in srgb, var(--color-accent-teal) 8%, transparent) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover { text-decoration: none; box-shadow: 8px 8px 0 var(--color-accent-teal); border-color: var(--color-accent-teal); }
+.card:hover::after { opacity: 1; }
 
 .accent {
   height: 4px;

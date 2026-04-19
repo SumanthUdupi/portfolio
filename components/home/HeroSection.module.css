@@ -1,74 +1,132 @@
+/* ─── Section container ──────────────────────────────────── */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  padding: calc(var(--nav-h) + var(--space-10)) var(--space-6) var(--space-16);
+  align-items: center;
+  /* NO overflow:hidden — blobs and particles need to breathe */
+  padding: calc(var(--nav-h) + var(--space-16)) var(--space-6) var(--space-20);
 }
 
-/* Parallax orbs */
-.bgOrb1 {
+/* ─── Blob layer — sits behind everything ───────────────── */
+.blobLayer {
   position: absolute;
-  top: -15%;
-  right: -10%;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* clip blobs to hero area */
+  overflow: hidden;
+}
+
+.blob1 {
+  position: absolute;
+  top: -10%;
+  right: -8%;
+  width: 65vw;
+  height: 65vw;
+  max-width: 800px;
+  max-height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, var(--color-accent-teal), transparent 65%);
+  opacity: 0.13;
+  will-change: transform;
+  filter: blur(1px);
+}
+
+.blob2 {
+  position: absolute;
+  bottom: -12%;
+  left: -10%;
   width: 55vw;
   height: 55vw;
   max-width: 700px;
   max-height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--color-accent-teal) 0%, transparent 65%);
-  opacity: 0.08;
-  pointer-events: none;
+  background: radial-gradient(circle at 60% 50%, var(--color-accent-amber), transparent 65%);
+  opacity: 0.10;
   will-change: transform;
+  filter: blur(1px);
 }
 
-.bgOrb2 {
+.blob3 {
   position: absolute;
-  bottom: 0;
-  left: -8%;
+  top: 30%;
+  left: 30%;
   width: 40vw;
   height: 40vw;
-  max-width: 500px;
-  max-height: 500px;
+  max-width: 550px;
+  max-height: 550px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--color-accent-amber) 0%, transparent 65%);
-  opacity: 0.06;
-  pointer-events: none;
+  background: radial-gradient(circle, var(--color-accent-red), transparent 65%);
+  opacity: 0.05;
   will-change: transform;
+  filter: blur(2px);
 }
 
+[data-theme="dark"] .blob1 { opacity: 0.22; }
+[data-theme="dark"] .blob2 { opacity: 0.18; }
+[data-theme="dark"] .blob3 { opacity: 0.10; }
+
+/* ─── Background grid ───────────────────────────────────── */
 .bgGrid {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image:
     linear-gradient(var(--color-border) 1px, transparent 1px),
     linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.25;
+  background-size: 56px 56px;
+  opacity: 0.20;
   pointer-events: none;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  will-change: transform;
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 10%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 10%, transparent 100%);
 }
 
-[data-theme="dark"] .bgOrb1 { opacity: 0.12; }
-[data-theme="dark"] .bgOrb2 { opacity: 0.09; }
+/* ─── Particle layer ────────────────────────────────────── */
+.particleLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
 
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.particle_teal {
+  background: radial-gradient(circle, var(--color-accent-teal) 0%, transparent 70%);
+  filter: blur(4px);
+}
+
+.particle_amber {
+  background: radial-gradient(circle, var(--color-accent-amber) 0%, transparent 70%);
+  filter: blur(3px);
+}
+
+[data-theme="dark"] .particle_teal  { filter: blur(6px); }
+[data-theme="dark"] .particle_amber { filter: blur(5px); }
+
+/* ─── Main content grid ─────────────────────────────────── */
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto auto auto;
-  gap: var(--space-6) var(--space-12);
+  gap: var(--space-6) 0;
   align-items: start;
 }
 
+/* ─── Eyebrow ───────────────────────────────────────────── */
 .eyebrow {
-  grid-column: 1;
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -83,73 +141,83 @@
   color: var(--color-accent-sage);
   font-size: var(--text-xs);
   border: 1px solid var(--color-accent-sage);
-  padding: 0.1em 0.5em;
+  padding: 0.12em 0.55em;
 }
 
+/* ─── Name ──────────────────────────────────────────────── */
 .nameWrap {
-  grid-column: 1;
   display: flex;
   flex-wrap: wrap;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  overflow: hidden;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  perspective: 1000px;
+  margin: 0;
+  padding: 0;
 }
 
 .nameChar {
   display: inline-block;
   will-change: transform;
+  transform-origin: bottom center;
 }
 
-.tagline {
-  grid-column: 1;
-  font-size: clamp(1rem, 2.2vw, 1.35rem);
+/* ─── Tagline ───────────────────────────────────────────── */
+.taglineWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+}
+
+.taglineSlot {
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.taglineWord {
+  display: inline-block;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   color: var(--color-text-secondary);
-  max-width: 52ch;
-  line-height: 1.6;
-  margin: 0;
+  will-change: transform;
 }
 
-.taglineWord { display: inline-block; }
-
+/* ─── CTAs ──────────────────────────────────────────────── */
 .ctas {
-  grid-column: 1;
   display: flex;
   gap: var(--space-4);
   align-items: center;
   flex-wrap: wrap;
+  padding-top: var(--space-2);
 }
 
 .ctaPrimary {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.75em 1.6em;
+  padding: 0.8em 1.8em;
   background: var(--color-text-primary);
   color: var(--color-bg);
   font-family: var(--font-ui);
   font-weight: 700;
   font-size: var(--text-sm);
   text-decoration: none;
-  letter-spacing: 0.02em;
-  box-shadow: 6px 6px 0 var(--color-accent-teal);
-  transition: box-shadow 0.15s, transform 0.15s;
+  letter-spacing: 0.03em;
+  box-shadow: 7px 7px 0 var(--color-accent-teal);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .ctaPrimary:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 var(--color-accent-teal);
+  box-shadow: 10px 10px 0 var(--color-accent-teal);
   text-decoration: none;
 }
 
 .ctaArrow {
+  display: inline-block;
   font-size: 1.1em;
-  transition: transform 0.15s;
 }
-
-.ctaPrimary:hover .ctaArrow { transform: translate(2px, -2px); }
 
 .ctaSecondary {
   font-family: var(--font-mono);
@@ -168,32 +236,33 @@
 }
 
 .konamiHint {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   cursor: help;
   color: var(--color-text-secondary);
   user-select: none;
 }
 
-.chipFloat {
-  grid-column: 2;
-  grid-row: 1 / 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ─── CHIP ──────────────────────────────────────────────── */
+.chipWrap {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
   will-change: transform;
-  padding-top: var(--space-8);
-  animation: chipFloat 3s ease-in-out infinite;
+  animation: chipFloat 4s ease-in-out infinite;
 }
 
 @keyframes chipFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50%       { transform: translateY(-50%) translateY(-16px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .chipFloat { animation: none; }
+  .chipWrap { animation: none; }
 }
 
+/* ─── Scroll cue ────────────────────────────────────────── */
 .scrollCue {
   position: absolute;
   bottom: var(--space-8);
@@ -203,51 +272,48 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
+  z-index: 4;
 }
 
-.scrollDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+.scrollLine {
+  width: 1px;
+  height: 32px;
   background: var(--color-text-secondary);
+  transform-origin: top center;
+  will-change: transform;
 }
 
+.scrollLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero {
-    padding: calc(var(--nav-h) + var(--space-6)) var(--space-4) var(--space-12);
-    justify-content: flex-start;
-  }
-  .content {
-    grid-template-columns: 1fr;
-    gap: var(--space-4) 0;
-  }
-  .chipFloat {
-    grid-column: 1;
-    grid-row: auto;
-    justify-content: center;
-    padding-top: var(--space-4);
-  }
-  .nameWrap {
-    font-size: clamp(2.2rem, 11vw, 3.5rem);
-  }
-  .ctas {
-    flex-direction: column;
+    padding: calc(var(--nav-h) + var(--space-8)) var(--space-4) var(--space-16);
     align-items: flex-start;
+    min-height: 100svh;
   }
+  .nameWrap { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+  .chipWrap {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    animation: chipFloatMobile 4s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+  @keyframes chipFloatMobile {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+  .ctas { flex-direction: column; align-items: flex-start; }
+  .blob1 { width: 90vw; height: 90vw; top: -5%; right: -20%; }
+  .blob2 { width: 70vw; height: 70vw; bottom: -5%; left: -15%; }
 }
-
-/* ─── Floating particles ─────────────────────────────────── */
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--color-accent-teal);
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-[data-theme="dark"] .particle {
-  background: var(--color-accent-amber);
-}
-
-/* bgGrid inherits will-change from motion style */
-.bgGrid { will-change: transform; }

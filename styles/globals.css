@@ -162,3 +162,31 @@ a:hover {
 .graph-paper {
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 20 0 L 0 0 0 20' fill='none' stroke='%23C4B8A8' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
 }
+
+/* ─── Global motion improvements ────────────────────────── */
+
+/* Calm mode — kill all JS and CSS animations */
+[data-calm="true"] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+[data-calm="true"] [style*="transform"] {
+  transform: none !important;
+}
+
+/* Smooth scrollbar color */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-teal); }
+
+/* Text selection */
+::selection {
+  background: var(--color-accent-teal);
+  color: var(--color-bg);
+}

@@ -1,6 +1,9 @@
 import { getAllProjects } from '@/lib/projects'
 import { ProjectCard } from '@/components/work/ProjectCard'
 import { PageWrapper } from '@/components/layout/PageWrapper'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { StaggerList } from '@/components/home/StaggerList'
+import { AnimatedCard } from '@/components/home/AnimatedCard'
 import type { Metadata } from 'next'
 import styles from './page.module.css'
 
@@ -14,21 +17,22 @@ export default function WorkPage() {
 
   return (
     <PageWrapper>
-      <header className={styles.header}>
-        <h1 className={styles.heading}>Selected Work</h1>
-        <p className={styles.sub}>Product design, systems thinking, and the occasional experiment.</p>
-      </header>
+      <PageHeader
+        accent="// selected work"
+        title="Case Studies"
+        sub="Product design, systems thinking, and the occasional experiment."
+      />
 
       {projects.length === 0 ? (
         <p className={styles.empty}>Case studies coming soon.</p>
       ) : (
-        <ul className={styles.grid} role="list">
+        <StaggerList className={styles.grid} stagger={0.1}>
           {projects.map(p => (
-            <li key={p.slug}>
+            <AnimatedCard key={p.slug}>
               <ProjectCard project={p} />
-            </li>
+            </AnimatedCard>
           ))}
-        </ul>
+        </StaggerList>
       )}
     </PageWrapper>
   )

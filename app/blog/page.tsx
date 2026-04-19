@@ -1,6 +1,9 @@
 import { getAllPosts, getAllCategories, getAllTags } from '@/lib/posts'
 import { PostCard } from '@/components/blog/PostCard'
 import { PageWrapper } from '@/components/layout/PageWrapper'
+import { PageHeader } from '@/components/ui/PageHeader'
+import { StaggerList } from '@/components/home/StaggerList'
+import { AnimatedCard } from '@/components/home/AnimatedCard'
 import type { Metadata } from 'next'
 import styles from './page.module.css'
 
@@ -16,10 +19,11 @@ export default function BlogPage() {
 
   return (
     <PageWrapper>
-      <header className={styles.header}>
-        <h1 className={styles.heading}>The Blog</h1>
-        <p className={styles.sub}>Thoughts on design, engineering, philosophy, and the chaos in between.</p>
-      </header>
+      <PageHeader
+        accent="// writing"
+        title="The Blog"
+        sub="Thoughts on design, engineering, philosophy, and the chaos in between."
+      />
 
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
@@ -48,13 +52,13 @@ export default function BlogPage() {
           {posts.length === 0 ? (
             <p className={styles.empty}>No posts yet — check back soon.</p>
           ) : (
-            <ul className={styles.postList} role="list">
+            <StaggerList className={styles.postList} stagger={0.08}>
               {posts.map(post => (
-                <li key={post.slug}>
+                <AnimatedCard key={post.slug}>
                   <PostCard post={post} />
-                </li>
+                </AnimatedCard>
               ))}
-            </ul>
+            </StaggerList>
           )}
         </section>
       </div>
