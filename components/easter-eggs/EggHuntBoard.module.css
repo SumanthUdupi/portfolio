@@ -1,0 +1,95 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.progress { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.pct { color: var(--color-accent-amber); }
+
+.track {
+  height: 6px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-teal), var(--color-accent-amber));
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.egg {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  opacity: 0.5;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+
+.found {
+  opacity: 1;
+  border-color: var(--color-accent-teal);
+}
+
+.eggNum {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-border);
+  width: 1.5em;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+.found .eggNum { color: var(--color-accent-teal); }
+
+.eggIcon {
+  font-size: var(--text-xl);
+  flex-shrink: 0;
+  width: 2em;
+  text-align: center;
+}
+
+.eggInfo { display: flex; flex-direction: column; gap: var(--space-1); }
+
+.eggName {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.eggHint {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  margin: 0;
+}
+
+.found .eggHint { color: var(--color-accent-sage); }
+
+.winner {
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-accent-teal);
+  color: var(--color-bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-align: center;
+}

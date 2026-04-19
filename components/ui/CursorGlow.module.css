@@ -1,0 +1,19 @@
+.glow {
+  position: fixed;
+  top: -300px;
+  left: -300px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-teal) 0%, transparent 70%);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .glow {
+  opacity: 0.1;
+  mix-blend-mode: screen;
+}

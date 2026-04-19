@@ -1,5 +1,3 @@
-'use client'
-
 import { getEggKeys } from '@/config/easter-eggs'
 
 const STORAGE_KEY = 'chaos_eggs_found'
@@ -15,15 +13,21 @@ export function getFoundEggs(): string[] {
 
 export function unlockEgg(key: string): boolean {
   const found = getFoundEggs()
-  if (found.includes(key)) return false
-  found.push(key)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(found))
-  dispatchEggEvent(key)
-  return true
+  const isNew = !found.includes(key)
+  if (isNew) {
+    found.push(key)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(found))
+  }
+  // Always dispatch so the toast fires (even on re-trigger during testing)
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('egg-found', { detail: { key, isNew } }))
+  }
+  return isNew
 }
 
-function dispatchEggEvent(key: string) {
-  window.dispatchEvent(new CustomEvent('egg-found', { detail: { key } }))
+export function resetEgg(key: string) {
+  const found = getFoundEggs().filter(k => k !== key)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(found))
 }
 
 export function countFoundEggs(): number {

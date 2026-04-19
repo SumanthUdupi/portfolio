@@ -37,3 +37,6 @@
 .links a:hover {
   color: var(--color-text-primary);
 }
+
+.eggLink { font-family: var(--font-mono); font-size: var(--text-xs); }
+.eggActive { color: var(--color-accent-amber); }

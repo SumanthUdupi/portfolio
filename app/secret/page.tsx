@@ -1,6 +1,8 @@
 import { Chip } from '@/components/chip/Chip'
 import { PageWrapper } from '@/components/layout/PageWrapper'
-import { EGGS, TOTAL_EGGS } from '@/config/easter-eggs'
+import { SecretEggUnlocker } from '@/components/easter-eggs/SecretEggUnlocker'
+import { EggHuntBoard } from '@/components/easter-eggs/EggHuntBoard'
+import { TOTAL_EGGS } from '@/config/easter-eggs'
 import type { Metadata } from 'next'
 import styles from './page.module.css'
 
@@ -12,30 +14,21 @@ export const metadata: Metadata = {
 export default function SecretPage() {
   return (
     <PageWrapper>
+      <SecretEggUnlocker />
       <section className={styles.wrapper}>
         <Chip state="excited" size={64} commentary="You found me." />
 
-        <h1 className={styles.heading}>The Secret Page</h1>
+        <h1 className={styles.heading}>Egg Hunt</h1>
         <p className={styles.sub}>
-          There are {TOTAL_EGGS} easter eggs hidden across this site.
-          Collecting all of them unlocks... something. Probably.
+          {TOTAL_EGGS} easter eggs are hidden across this site.
+          Each one is a breadcrumb. Follow the chaos.
         </p>
 
-        <div className={styles.eggGrid}>
-          {Object.entries(EGGS).map(([key, egg]) => (
-            <div key={key} className={styles.egg} data-egg-id={key}>
-              <div className={styles.eggIcon}>🥚</div>
-              <div className={styles.eggInfo}>
-                <strong className={styles.eggName}>{egg.label}</strong>
-                <p className={styles.eggHint}>{egg.trigger}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <EggHuntBoard />
 
         <p className={styles.note}>
-          Found eggs are tracked in your browser. No account needed.
-          CHIP is watching, though.
+          Progress lives in your browser. No account needed.
+          CHIP is watching though.
         </p>
       </section>
     </PageWrapper>

@@ -5,25 +5,62 @@
   background: var(--color-surface);
   text-decoration: none;
   color: inherit;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 4px 4px 0 var(--color-border);
   overflow: hidden;
   position: relative;
-  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-md);
   text-decoration: none;
+  box-shadow: 8px 8px 0 var(--accent, var(--color-border));
+}
+
+.card:hover .fold {
+  border-width: 0 56px 56px 0;
 }
 
 .thumb {
-  height: 200px;
-  border-bottom: 1.5px solid var(--color-border);
   position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-bottom: 1.5px solid var(--color-border);
 }
 
-/* Corner fold effect */
+.thumbBg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .thumbBg { transform: scale(1.04); }
+
+.thumbGlyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 6rem;
+  color: var(--accent, var(--color-border));
+  opacity: 0.15;
+  user-select: none;
+}
+
+.yearBadge {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.15em 0.5em;
+  color: var(--color-text-secondary);
+}
+
 .fold {
   position: absolute;
   top: 0;
@@ -31,38 +68,31 @@
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 0 32px 32px 0;
+  border-width: 0 36px 36px 0;
   border-color: transparent var(--color-bg) transparent transparent;
-}
-
-.card:hover .fold {
-  border-width: 0 48px 48px 0;
-  transition: border-width 0.15s;
+  z-index: 2;
+  transition: border-width 0.2s ease;
 }
 
 .body {
-  padding: var(--space-4);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  flex: 1;
 }
 
 .meta {
   display: flex;
-  gap: var(--space-3);
-  align-items: center;
-}
-
-.year {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-secondary);
+  gap: var(--space-2);
 }
 
 .role {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-accent-teal);
+  color: var(--accent, var(--color-accent-teal));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .title {
@@ -83,4 +113,10 @@
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: var(--space-2);
+}
+
+.accentBar {
+  height: 4px;
+  background: var(--accent, var(--color-accent-teal));
+  margin-top: auto;
 }

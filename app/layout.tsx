@@ -6,6 +6,8 @@ import { PageTransition } from '@/components/layout/PageTransition'
 import { CalmProvider } from '@/lib/calm-mode'
 import { Terminal } from '@/components/terminal/Terminal'
 import { KonamiCode } from '@/components/easter-eggs/KonamiCode'
+import { EggToast } from '@/components/easter-eggs/EggToast'
+import { CursorGlow } from '@/components/ui/CursorGlow'
 import './globals.css'
 import '../styles/globals.css'
 import '../styles/typography.css'
@@ -73,6 +75,7 @@ export default function RootLayout({
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <a href="#main-content" className="skip-link">Skip to main content</a>
           <CalmProvider>
+            <CursorGlow />
             <Nav />
             <PageTransition>
               {children}
@@ -80,6 +83,7 @@ export default function RootLayout({
             <Footer />
             <Terminal />
             <KonamiCode />
+            <EggToast />
           </CalmProvider>
         </body>
     </html>

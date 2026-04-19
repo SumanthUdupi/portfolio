@@ -1,0 +1,41 @@
+.indicator {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-1);
+  background: var(--color-text-primary);
+  padding: var(--space-2) var(--space-3);
+  z-index: 8000;
+  pointer-events: none;
+}
+
+.key {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  width: 1.8em;
+  height: 1.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #3A342C;
+  color: #9E9283;
+}
+
+.done {
+  border-color: var(--color-accent-teal);
+  color: var(--color-accent-teal);
+  background: rgba(29, 106, 114, 0.15);
+}
+
+.next {
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+  animation: pulse 0.6s ease infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}

@@ -13,6 +13,7 @@ import { CuriosityMeter } from '@/components/blog/CuriosityMeter'
 import { ReactionButton } from '@/components/blog/ReactionButton'
 import { RabbitHoleNavigator } from '@/components/blog/RabbitHoleNavigator'
 import { getRelatedPosts } from '@/lib/posts'
+import { PostReadTracker } from '@/components/easter-eggs/PostReadTracker'
 import type { Metadata } from 'next'
 import styles from './page.module.css'
 
@@ -43,6 +44,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <PageWrapper>
+      <PostReadTracker slug={slug} />
       <article className={styles.article}>
         <header className={styles.header}>
           <div className={styles.meta}>

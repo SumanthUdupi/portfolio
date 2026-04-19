@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getProjectBySlug } from '@/lib/mdx'
 import { getProjectSlugs } from '@/lib/projects'
+import { ProjectViewTracker } from '@/components/easter-eggs/ProjectViewTracker'
 import { StampTag } from '@/components/ui/StampTag'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { mdxComponents } from '@/components/mdx'
@@ -30,9 +31,11 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound()
 
   const { frontmatter, content } = project
+  const total = getProjectSlugs().length
 
   return (
     <PageWrapper>
+      <ProjectViewTracker slug={slug} total={total} />
       <article className={styles.article}>
         <header
           className={styles.header}

@@ -22,20 +22,17 @@ export function CalmProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.altKey && e.key === 'c') {
-        setCalm(prev => {
-          const next = !prev
-          document.documentElement.setAttribute('data-calm', String(next))
-          localStorage.setItem('calm-mode', String(next))
-          return next
-        })
+      // Ctrl+Shift+C — reliable cross-platform
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.code === 'KeyC') {
+        e.preventDefault()
+        applyToggle()
       }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [])
 
-  const toggle = () => {
+  const applyToggle = () => {
     setCalm(prev => {
       const next = !prev
       document.documentElement.setAttribute('data-calm', String(next))
@@ -44,7 +41,7 @@ export function CalmProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  return <CalmContext.Provider value={{ calm, toggle }}>{children}</CalmContext.Provider>
+  return <CalmContext.Provider value={{ calm, toggle: applyToggle }}>{children}</CalmContext.Provider>
 }
 
 export function useCalm() {
